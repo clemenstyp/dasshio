@@ -20,7 +20,10 @@ def arp_display(pkt):
         logging.info("Request: " + button['url'])
         
         try:
-            request = requests.post(button['url'], json=json.loads(button['body']), headers=json.loads(button['headers']))
+            if not button['body']:
+                request = requests.post(button['url'], json=json.loads(button['body']), headers=json.loads(button['headers']))
+            else:
+                request = requests.get(button['url'], headers=json.loads(button['headers']))
             logging.info('Status Code: {}'.format(request.status_code))
             
             if request.status_code == requests.codes.ok:
