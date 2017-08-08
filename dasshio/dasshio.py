@@ -20,7 +20,7 @@ def arp_display(pkt):
         logging.info("Request: " + button['url'])
         
         try:
-            if not button['body']:
+            if 'body' in button.keys():
                 request = requests.post(button['url'], json=json.loads(button['body']), headers=json.loads(button['headers']))
             else:
                 request = requests.get(button['url'], headers=json.loads(button['headers']))
